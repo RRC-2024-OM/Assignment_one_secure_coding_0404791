@@ -1,4 +1,3 @@
-import os
 import pymysql
 from urllib.request import urlopen
 import subprocess
@@ -15,7 +14,7 @@ def get_user_input():
     return user_input
 
 def send_email(to, subject, body):
-    os.system(f'echo {body} | mail -s "{subject}" {to}')
+    subprocess.run(['mail', '-s', subject, to], input=body.encode())
 
 def get_data():
     url = 'http://insecure-api.com/get-data'
