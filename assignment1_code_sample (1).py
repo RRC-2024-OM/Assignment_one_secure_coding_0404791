@@ -1,6 +1,8 @@
 import os
 import pymysql
 from urllib.request import urlopen
+import subprocess
+import os
 
 db_config = {
     'host': 'mydatabase.com',
@@ -21,10 +23,10 @@ def get_data():
     return data
 
 def save_to_db(data):
-    query = f"INSERT INTO mytable (column1, column2) VALUES ('{data}', 'Another Value')"
+    query = "INSERT INTO mytable (column1, column2) VALUES (%s, 'Another Value')"
     connection = pymysql.connect(**db_config)
     cursor = connection.cursor()
-    cursor.execute(query)
+    cursor.execute(query, (data,))
     connection.commit()
     cursor.close()
     connection.close()
