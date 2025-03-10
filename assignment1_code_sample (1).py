@@ -4,9 +4,9 @@ import subprocess
 import os
 
 db_config = {
-    'host': 'mydatabase.com',
-    'user': 'admin',
-    'password': 'secret123'
+    'host': os.environ.get('DB_HOST', 'mydatabase.com'),
+    'user': os.environ.get('DB_USER', 'admin'),
+    'password': os.environ.get('DB_PASSWORD', 'secret123')
 }
 
 def get_user_input():
